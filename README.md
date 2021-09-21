@@ -13,7 +13,7 @@ MIT License
 
 ## How to run
 ```bash
-gradle build3
+gradle build
 ```
 
 ## How to run with Docker
