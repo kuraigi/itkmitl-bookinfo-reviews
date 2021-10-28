@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookinfo-dev-reviews
+  namespace: student9-bookinfo-dev
+  labels:
+    app: bookinfo-dev-reviews
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookinfo-dev-reviews
+  template:
+    metadata:
+      labels:
+        app: bookinfo-dev-reviews
+    spec:
+      containers:
+      - name: bookinfo-dev-reviews
+        image: ghcr.io/kuraigi/bookinfo-reviews:dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8082
+          name: web-port
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8082
+            scheme: HTTP
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8082
+            scheme: HTTP
+
+      imagePullSecrets:
+      - name: registry-bookinfo
