@@ -33,6 +33,11 @@ spec:
             path: /health
             port: 8082
             scheme: HTTP
+        env:
+        - name: RATINGS_SERVICE
+          value: http://bookinfo-dev-ratings:8080
+        - name: ENABLE_RATINGS
+          value: 'true'
 
       imagePullSecrets:
       - name: registry-bookinfo
